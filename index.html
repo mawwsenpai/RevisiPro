@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html class='v2' lang='id' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+    <meta charset='UTF-8'/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0' name='viewport'/>
+    <meta content='#0c1012' id='theme-color-meta' name='theme-color'/>
+    <title>Novel Revisi Pro</title>
+
+    <link href='style.css' rel='stylesheet'/>
+    
+    <link href='https://fonts.googleapis.com' rel='preconnect'/>
+    <link crossorigin='true' href='https://fonts.gstatic.com' rel='preconnect'/>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel='stylesheet'/>
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Merriweather:wght@400;700&amp;display=swap' rel='stylesheet'/>
+</head>
+
+<body class='no-copy' data-animation='subtle-gradient' data-font='poppins' data-theme='dark'>
+
+    <div id='animated-bg'>
+        <div class='animation-container fire-particles' id='fire-particles-container'></div>
+        <div class='animation-container shooting-stars' id='shooting-stars-container'></div>
+        <div class='animation-container blinking-stars' id='blinking-stars-container'></div>
+        <div class='animation-container bubbles' id='bubbles-container'></div>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text"></p>
+    </div>
+
+    <div class='app-layout'>
+
+        <aside class='app-sidebar' id='app-sidebar'>
+            <div class='sidebar-header'>
+                <div class='sidebar-header-top'>
+                    <div>
+                        <h2 class='sidebar-title'>Novel Revisi Pro</h2>
+                        <p class='sidebar-version'>v50.3.4.1 By-MawwSenpai_</p>
+                    </div>
+                </div>
+                <button class='modal-close-btn' onclick='document.getElementById(&apos;app-sidebar&apos;).classList.remove(&apos;is-open&apos;)' style='display: none;'>&amp;times;</button>
+            </div>
+            <div class='sidebar-content-wrapper'>
+                <nav class='sidebar-nav'>
+                    <div class='control-group'>
+                        <h3 class='control-group-title'>Akun</h3>
+                        <ul class='nav-list' id='account-nav-list'>
+                            <li id='login-link-container'>
+                                <a class='nav-link' href='#' id='login-btn'><i class='fas fa-sign-in-alt'></i><span>Login / Daftar</span></a>
+                            </li>
+                            <li id='user-profile-link-container' style='display: none;'>
+                                <a class='nav-link profile-nav-link' data-view='user-profile-view' href='#'><img alt='Profil' class='profile-nav-link-img' src=''/><span>Profil Saya</span></a>
+                            </li>
+                            <li id='community-link-container' style='display: none;'>
+                                <a class='nav-link' data-view='community-view' href='#'><i class='fas fa-users'></i><span>Komunitas</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='control-group'>
+                        <h3 class='control-group-title'>Navigasi</h3>
+                        <ul class='nav-list'>
+                            <li><a class='nav-link active' data-view='app-dashboard' href='#'><i class='fas fa-home'></i><span>Dashboard</span></a></li>
+                            <li><a class='nav-link' data-modal-target='backupRestore' href='#' id='backup-restore-link'><i class='fas fa-cloud-download-alt'></i><span>Cloud</span></a></li>
+                            <li><a class='nav-link' data-modal-target='displaySettings' href='#'><i class='fas fa-cog'></i><span>Pengaturan Tampilan</span></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <div class='sidebar-overlay' id='sidebar-overlay'></div>
+
+        <main class='app-main-content'>
+
+            <div class='main-view active' id='app-dashboard'>
+                <header class='main-header' id='dashboard-header'>
+                    <div class='main-header-left'>
+                        <button aria-label='Buka Menu' class='mobile-menu-toggle'><i class='fas fa-bars'></i></button>
+                        <h1 class='main-title'>Dashboard</h1>
+                    </div>
+                </header>
+                <div class='dashboard-content'>
+                    <div style='display:flex; justify-content:space-between; align-items:center; padding: 0 var(--padding-md);'>
+                        <h2 class='section-title' style='padding:0;'>Novel Saya</h2>
+                        <button class='app-button primary' data-modal-target='createNovel' style='padding: 0.5rem 1rem; font-size: 0.9em;'><i class='fas fa-plus'></i> Buat</button>
+                    </div>
+                    <div class='novel-list-container'>
+                        <div class='novel-list-scroller' id='novel-list-scroller'></div>
+                    </div>
+                    <h2 class='section-title'>Aktivitas Terbaru</h2>
+                    <div id='activity-list'>
+                        <p style='padding: 0 var(--padding-md); color: var(--text-secondary);'>Tidak ada aktivitas terbaru.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='main-view' id='novel-detail-view'>
+                <header class='main-header'>
+                    <div class='main-header-left'>
+                        <button aria-label='Kembali ke Beranda' class='mobile-menu-toggle' id='back-to-dashboard-btn' title='Kembali ke Beranda'><i class='fas fa-arrow-left'></i></button>
+                        <h1 class='main-title'>Detail Novel</h1>
+                    </div>
+                    <div class='main-header-right'>
+                        <button aria-label='Edit Info Novel' class='app-button outline' data-modal-target='editNovel' id='edit-novel-info-btn' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;' title='Edit Info Novel'><i class='fas fa-edit'></i></button>
+                    </div>
+                </header>
+                <div class='novel-detail-container'>
+                    <div class='novel-header-info'>
+                        <div class='novel-cover-wrapper'>
+                            <img alt='Novel Cover' class='novel-cover' id='novel-cover-img' src=''/>
+                            <button aria-label='Edit Cover' class='edit-icon' data-modal-target='editNovel'><i class='fas fa-edit'></i></button>
+                        </div>
+                        <div class='novel-meta'>
+                            <h2 id='novel-title'></h2>
+                            <p id='novel-description'></p>
+                            <div class='novel-stats'>
+                                <span id='novel-stats-chapters'><i class='fas fa-book'></i> 0 Bab</span>
+                                <span id='novel-stats-words'><i class='fas fa-keyboard'></i> 0 Kata</span>
+                                <span id='novel-stats-genre'><i class='fas fa-tags'></i> <span>Genre</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='chapter-list-section'>
+                        <div class='chapter-list-header'>
+                            <h3 class='section-title' style='padding:0'>Daftar Bab</h3>
+                            <button class='app-button primary' id='add-chapter-btn'><i class='fas fa-plus'></i> Tambah Bab</button>
+                        </div>
+                        <div id='chapter-list'></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='main-view' id='chapter-editor-view'>
+                <header class='main-header'>
+                    <div class='main-header-left'>
+                        <button aria-label='Kembali ke Detail Novel' class='mobile-menu-toggle' id='back-to-novel-btn'><i class='fas fa-arrow-left'></i></button>
+                    </div>
+                    <div class='main-header-center'>
+                        <input id='main-header-title-input' placeholder='Judul Bab...' type='text'/>
+                    </div>
+                    <div class='main-header-right'>
+                        <div class='editor-view-switcher'>
+                            <button aria-label='Lihat Naskah Original' class='active' id='view-original-btn' title='Naskah Original'><i class='fa-solid fa-file-lines'></i></button>
+                            <button aria-label='Lihat Hasil Revisi' id='view-revisi-btn' title='Hasil Revisi'><i class='fa-solid fa-wand-magic-sparkles'></i></button>
+                        </div>
+                    </div>
+                </header>
+                <div class='editor-grid' id='editor-grid'>
+                    <div class='editor-panel' id='panel-original'>
+                        <div class='panel-header'>
+                            <h3 class='panel-title'>Naskah Original</h3>
+                            <div class='panel-actions'>
+                                <div class='editor-font-sizer' id='editor-font-sizer'>
+                                    <button aria-label='Perkecil Font Editor' id='decr-editor-font' title='Perkecil Font Editor'>-</button>
+                                    <span id='current-editor-font-size'>16px</span>
+                                    <button aria-label='Perbesar Font Editor' id='incr-editor-font' title='Perbesar Font Editor'>+</button>
+                                </div>
+                                <button aria-label='Revisi Cepat' class='app-button outline' id='quick-revise-btn' title='Revisi Cepat'><i class='fas fa-bolt'></i></button>
+                                <button aria-label='Generate Cerita' data-modal-target='generate' title='Generate Cerita'><i class='fas fa-wand-magic-sparkles'></i></button>
+                                <button aria-label='Pengaturan Revisi' data-modal-target='settings' title='Pengaturan Revisi'><i class='fas fa-sliders-h'></i></button>
+                            </div>
+                        </div>
+                        <textarea class='main-textarea' id='novel-input' placeholder='Tempel naskah novel Anda di sini atau generate cerita baru...'></textarea>
+                    </div>
+                    <div class='editor-panel' id='panel-revisi'>
+                        <div class='panel-header'>
+                            <h3 class='panel-title'>Hasil Revisi</h3>
+                            <div class='panel-actions'>
+                                <button class='app-button primary' id='save-revision-btn'><i class='fas fa-check'></i> Terapkan Revisi</button>
+                            </div>
+                        </div>
+                        <textarea class='main-textarea' id='revision-output' placeholder='Hasil revisi dan saran akan muncul di sini...' readonly='readonly'></textarea>
+                    </div>
+                </div>
+                <div class='editor-global-footer'>
+                    <div id='editor-footer-stats'>0 Kata, 0 Karakter</div>
+                    <div class='editor-footer-actions'>
+                        <button aria-label='Hapus Bab Ini' class='app-button outline danger' id='delete-chapter-btn' title='Hapus Bab Ini'><i class='fas fa-trash-alt'></i></button>
+                        <button aria-label='Salin Teks Aktif' class='app-button outline' id='copy-active-text-btn' title='Salin Teks Aktif'><i class='fas fa-copy'></i></button>
+                        <button class='app-button primary' id='save-chapter-btn' title='Simpan Bab'><i class='fas fa-save'></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class='main-view' id='community-view'>
+                <header class='main-header'>
+                    <div class='main-header-left'>
+                        <button aria-label='Kembali' class='mobile-menu-toggle' id='back-to-dashboard-community-btn' title='Kembali'><i class='fas fa-arrow-left'></i></button>
+                        <h1 class='main-title'>Komunitas AI Creator</h1>
+                    </div>
+                    <div class='main-header-right'>
+                        <button aria-label='Lihat Anggota' class='app-button outline' data-modal-target='community-members-modal' id='community-members-btn' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;'><i class='fas fa-users'></i></button>
+                    </div>
+                </header>
+                <div id='community-chat-box'>
+                    <div class='login-status' id='community-login-status'>
+                        <p>Silakan login untuk bergabung dalam obrolan komunitas.</p>
+                        <button class='app-button primary' id='community-login-btn'><i class='fas fa-sign-in-alt'></i> Login dengan Google</button>
+                    </div>
+                </div>
+                <div id='community-chat-input-wrapper' style='display: none;'>
+                    <input class='text-input' id='chat-input' placeholder='Ketik pesan...' type='text'/>
+                    <button aria-label='Kirim Pesan' id='send-chat-btn'><i class='fas fa-paper-plane'></i></button>
+                </div>
+            </div>
+
+            <div class='main-view' id='user-profile-view'>
+                <header class='main-header'>
+                    <div class='main-header-left'>
+                        <button aria-label='Kembali' class='mobile-menu-toggle' id='back-to-dashboard-profile-btn' title='Kembali'><i class='fas fa-arrow-left'></i></button>
+                        <h1 class='main-title' id='user-profile-title'>Profil Saya</h1>
+                    </div>
+                    <div class='main-header-right'>
+                        <button aria-label='Edit Profil' class='app-button outline' data-modal-target='edit-profile-modal' id='edit-profile-btn' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;'><i class='fas fa-edit'></i></button>
+                        <button aria-label='Keluar' class='app-button outline danger' id='logout-btn-profile' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;' title='Keluar'>
+                            <i class='fas fa-sign-out-alt'></i>
+                        </button>
+                    </div>
+                </header>
+                <div class='dashboard-content'>
+                    <div class='editor-grid'>
+                        <div class='editor-panel'>
+                            <div class='panel-body' style='padding: var(--padding-lg); display: flex; flex-direction: column; align-items: center; text-align: center;'>
+                                <img alt='User Profile Photo' id='profile-img' src='https://ui-avatars.com/api/?name=U&amp;background=random' style='width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border-color); margin-bottom: var(--padding-md);'/>
+                                <h2 id='profile-name' style='font-size: 1.8em; color: var(--accent-color); margin: 0;'>Nama Pengguna</h2>
+                                <p id='profile-email' style='color: var(--text-secondary); margin-top: 4px;'>email@example.com</p>
+                                <p id='profile-desc' style='margin-top: var(--padding-sm); max-width: 40ch;'>Deskripsi singkat pengguna akan muncul di sini.</p>
+                                <div class='social-links' id='social-links-view' style='margin-top: var(--padding-md);'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div style='display: none;'>
+        <b:section class='main' id='main' showaddelement='no'/>
+    </div>
+    
+    <div class='modal' id='require-app-modal'>
+        <div class='modal-panel' style='max-width: 420px;'>
+            <div class='modal-header'>
+                <h3 class='modal-title' style='display: flex; align-items: center; gap: 10px;'>
+                    <i class='fab fa-android' style='color: var(--accent-color);'></i>
+                    <span>Fitur Lengkap di Aplikasi</span>
+                </h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body' style='padding-bottom: var(--padding-lg);'>
+                <p style='text-align: center; margin-top:0; margin-bottom: 1.5rem; color: var(--text-secondary);'>
+                    Untuk mengakses <b>Komunitas, Profil, Tema &amp; Animasi Eksklusif</b>, silakan gunakan aplikasi Android kami.
+                </p>
+                <div style='text-align: center; display: flex; flex-direction: column; gap: 1rem;'>
+                    <a href="https://drive.usercontent.google.com/download?id=1xFuzDv8dgbjKGUkaOPBNkb62YF2CQTsZ&amp;export=download" 
+                        download="Novel-Revisi-Pro.apk" 
+                        class="app-button outline" 
+                        style="text-decoration: none; padding: 10px 24px; font-size: 1em;">
+                       <i class='fas fa-download'></i> Unduh Aplikasi
+                    </a>
+                    <button class="app-button primary" id="web-login-btn">
+                       <i class="fas fa-sign-in-alt"></i> Login Sekarang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='quick-revisi-modal'>
+        <div class='modal-panel' style='max-width: 450px;'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Revisi Cepat</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Pilihan Revisi Cepat</h4>
+                        <div class='options-container'>
+                            <label><input checked='checked' name='quick-revise-option' type='radio' value='typo'/><span>Hanya Perbaiki Typo</span></label>
+                            <label><input name='quick-revise-option' type='radio' value='concise'/><span>Buat Lebih Ringkas</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='confirm-quick-revise-btn'>Jalankan Revisi Cepat</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='delete-confirm-modal'>
+        <div class='modal-panel' style='max-width: 450px;'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Konfirmasi Penghapusan</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <p>Anda yakin ingin menghapus <strong id='item-to-delete-name' style='color: var(--accent-color);'></strong> secara permanen?</p>
+                <p style='color: var(--text-secondary); font-size: 0.9em;'>Tindakan ini tidak dapat diurungkan.</p>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button danger' id='confirm-delete-btn'>Ya, Hapus Permanen</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='display-settings-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Pengaturan Tampilan</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Pilihan Tema</h4>
+                        <div class='options-container' id='theme-options'>
+                            <label><input checked='checked' name='theme' type='radio' value='dark'/><span>Moderen Dark</span></label>
+                            <label><input name='theme' type='radio' value='air'/><span>Air</span></label>
+                            <label><input name='theme' type='radio' value='buku'/><span>Buku</span></label>
+                            <label><input name='theme' type='radio' value='gelap'/><span>Gelap</span></label>
+                            <label><input name='theme' type='radio' value='coklat'/><span>Coklat</span></label>
+                            <label><input name='theme' type='radio' value='google-pixel'/><span>Google Pixel</span></label>
+                        </div>
+                    </div>
+                    <div class='setting-group' id='exclusive-themes-container'>
+                        <h4 class='setting-group-title'>Tema Eksklusif</h4>
+                        <div class='options-container' id='exclusive-theme-options'>
+                            <label><input name='theme' type='radio' value='matrix'/><span>Matrix</span></label>
+                            <label><input name='theme' type='radio' value='senja'/><span>Senja</span></label>
+                            <label><input name='theme' type='radio' value='cyberpunk'/><span>Cyberpunk</span></label>
+                            <label><input name='theme' type='radio' value='laut-dalam'/><span>Laut Dalam</span></label>
+                            <label><input name='theme' type='radio' value='retro'/><span>Retro</span></label>
+                            <label><input name='theme' type='radio' value='neon-merah'/><span>Neon Merah</span></label>
+                            <label><input name='theme' type='radio' value='neon-putih'/><span>Neon Putih</span></label>
+                            <label><input name='theme' type='radio' value='neon-biru'/><span>Neon Biru</span></label>
+                            <label><input name='theme' type='radio' value='neon-ungu'/><span>Neon Ungu</span></label>
+                            <label><input name='theme' type='radio' value='neon-google'/><span>Neon Google</span></label>
+                            <label><input name='theme' type='radio' value='buku-klasik'/><span>Buku Klasik</span></label>
+                            <label><input name='theme' type='radio' value='novel'/><span>Novel</span></label>
+                            <label><input name='theme' type='radio' value='kertas'/><span>Kertas</span></label>
+                            <label><input name='theme' type='radio' value='karbon'/><span>Karbon</span></label>
+                            <label><input name='theme' type='radio' value='langit'/><span>Langit</span></label>
+                        </div>
+                        <div id='login-for-themes-prompt' style='display: none; text-align: center; margin-top: 1rem; color: var(--text-secondary);'>
+                            <p>Login untuk membuka tema eksklusif!</p>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Pilihan Font</h4>
+                        <div class='options-container scrollable' id='font-options'>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Pilihan Animasi Latar</h4>
+                        <div class='options-container' id='animation-options'>
+                            <label><input name='animation' type='radio' value='none'/><span>Tidak ada</span></label>
+                            <label><input checked='checked' name='animation' type='radio' value='subtle-gradient'/><span>Subtle Gradient</span></label>
+                            <label><input name='animation' type='radio' value='fire-particles'/><span>Api</span></label>
+                            <label><input name='animation' type='radio' value='shooting-stars'/><span>Shooting Stars</span></label>
+                            <label><input name='animation' type='radio' value='blinking-stars'/><span>Stars</span></label>
+                            <label><input name='animation' type='radio' value='bubbles'/><span>Bubbles</span></label>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Ukuran Font Sistem</h4>
+                        <div style='display:flex; align-items:center; gap:10px;'>
+                            <input data-target='system-font-size-slider' id='system-font-size-slider' max='1.2' min='0.8' step='0.05' style='flex-grow:1;' type='range' value='1'/>
+                            <span class='font-size-value'>1rem</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='modal' id='backup-restore-modal'>
+    <div class='modal-panel'>
+        <div class='modal-header'>
+            <h3 class='modal-title'>Pengaturan Cloud Dropbox</h3>
+            <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+        </div>
+        <div class='modal-body'>
+            <div class='custom-settings'>
+
+                <div class='setting-group' style='margin-top:20px; border-top: padding-top: 20px;'>
+                    <h4 class='setting-group-title'>Autentikasi Dropbox</h4>
+                    <p style='font-size:0.9em; color:var(--text-secondary);'>
+                        Gunakan tombol di bawah untuk memaksa sinkronisasi atau mengambil data dari cloud.
+                    </p>
+                    <div style="margin-top:20px; border-top:">
+                        <button class='app-button outline' id='relink-dropbox-btn' style="margin-top:10px;"><i class='fab fa-dropbox'></i>autentikasi ulang</button>
+                    </div>
+                </div>
+
+                <div class='setting-group' style='margin-top:20px; border-top: 1px solid var(--border-color);'>
+                    <h4 class='setting-group-title'>Opsi Lanjutan</h4>
+                    <p style='font-size:0.9em; color:var(--text-secondary);'>
+                        Jika sinkronisasi terasa aneh atau kamu merasa data di cloud rusak, gunakan tombol ini. Ini akan mengunggah ulang semua datamu dari perangkat ini ke cloud dan memperbaiki koneksinya.
+                    </p>
+                    <button class='app-button outline danger' id='force-resync-btn' style='margin-top:10px;'>
+                        <i class='fas fa-sync-alt'></i>Perbaiki Sekarang
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div class='modal' id='create-novel-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Buat Novel Baru</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='form-group'>
+                        <label for='new-novel-cover'>Cover Novel</label>
+                        <label class='cover-uploader' for='new-novel-cover'>
+                            <div class='icon-overlay'><i class='fas fa-plus'></i></div>
+                            <img alt='Preview Cover' src='' style='display:none;'/>
+                        </label>
+                        <input accept='image/*' id='new-novel-cover' type='file'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='new-novel-title'>Judul Novel</label>
+                        <input class='text-input' id='new-novel-title' placeholder='Contoh: Sang Pangeran Terakhir' type='text'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='new-novel-desc'>Deskripsi Singkat</label>
+                        <textarea class='text-input' id='new-novel-desc' placeholder='Contoh: Petualangan seorang pangeran...' style='min-height:80px'></textarea>
+                    </div>
+                    <div class='form-group'>
+                        <label>Genre</label>
+                        <div class='options-container' id='new-novel-genres'></div>
+                    </div>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='confirm-create-novel'>Buat Novel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='edit-novel-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Edit Novel</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='form-group'>
+                        <label for='edit-novel-cover'>Cover Novel</label>
+                        <label class='cover-uploader' for='edit-novel-cover'>
+                            <div class='icon-overlay'><i class='fas fa-plus'></i></div>
+                            <img alt='Preview Cover' src='' style='display:none;'/>
+                        </label>
+                        <input accept='image/*' id='edit-novel-cover' type='file'/>
+                        <p style='font-size:0.8em; color:var(--text-secondary); margin-top:5px; text-align:center;'>Pilih file baru untuk mengganti cover.</p>
+                    </div>
+                    <div class='form-group'>
+                        <label for='edit-novel-title'>Judul Novel</label>
+                        <input class='text-input' id='edit-novel-title' type='text'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='edit-novel-desc'>Deskripsi Singkat</label>
+                        <textarea class='text-input' id='edit-novel-desc' style='min-height:80px'></textarea>
+                    </div>
+                    <div class='form-group'>
+                        <label>Genre</label>
+                        <div class='options-container' id='edit-novel-genres'></div>
+                    </div>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button aria-label='Hapus Novel' class='app-button outline danger' id='confirm-delete-novel-modal' style='padding: 0.5rem; width: 40px; height: 40px;' title='Hapus Novel'><i class='fas fa-trash-alt'></i></button>
+                <button class='app-button primary' id='confirm-edit-novel'>Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='generate-modal'>
+    <div class='modal-panel fixed-size-panel'>
+        <div class='modal-header'>
+            <h3 class='modal-title'>Generate Cerita</h3>
+            <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+        </div>
+        <div class='modal-body'>
+            <div class='custom-settings'>
+
+                <div class='form-group'>
+                    <label for='generate-prompt-input'>Prompt / Ide Cerita</label>
+                    <textarea class='text-input' id='generate-prompt-input' placeholder='Contoh: Buat plot cerita fantasi tentang pahlawan yang kehilangan ingatannya...' style='min-height:80px'></textarea>
+                </div>
+                
+                <div class='form-group'>
+                    <label for='generate-location-input'>Lokasi / Setting Cerita</label>
+                    <textarea class='text-input' id='generate-location-input' placeholder='Contoh: Di sebuah kota bawah tanah yang diterangi jamur ajaib, atau di stasiun luar angkasa yang terbengkalai...' style='min-height:60px'></textarea>
+                </div>
+
+                <div class='form-group'>
+                    <label>Genre Cerita</label>
+                    <div class='options-container scrollable' id='generate-genre-options' style='max-height: 80px;'>
+                        </div>
+                </div>
+
+                <div class='form-group'>
+                    <label for='generate-protagonist-name'>Nama Karakter Utama</label>
+                    <input class='text-input' id='generate-protagonist-name' type='text'/>
+                </div>
+                <div class='form-group' id='generate-characters-container'>
+                    <label>Karakter Lain</label>
+                    <div id='generate-additional-characters'></div>
+                    <button class='app-button outline' id='add-character-btn' style='font-size: 0.8em; padding: 0.5em 1em;'><i class='fas fa-plus'></i> Tambah Karakter</button>
+                </div>
+
+                <div class='form-group'>
+                    <label>Gaya Penulisan Naskah</label>
+                    <div class='options-container' id='generate-style-options'>
+                        <label><input checked='checked' name='style' type='radio' value='deskriptif dan naratif'/><span>Naratif &amp; Deskriptif</span></label>
+                        <label><input name='style' type='radio' value='sederhana dan lugas'/><span>Sederhana &amp; Lugas</span></label>
+                        <label><input name='style' type='radio' value='puitis dan metaforis'/><span>Puitis &amp; Metaforis</span></label>
+                        <label><input name='style' type='radio' value='bertempo cepat (fast-paced)'/><span>Tempo Cepat</span></label>
+                        <label><input name='style' type='radio' value='sinematik'/><span>Sinematik</span></label>
+                        <label><input name='style' type='radio' value='jurnalistik / reportase'/><span>Jurnalistik</span></label>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label>Detail / Nuansa Cerita (Bisa pilih lebih dari satu)</label>
+                    <div class='options-container' id='generate-details-options'>
+                        <label><input name='generate-detail' type='checkbox' value='Realistis'/><span>Realistis</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Dramatis'/><span>Dramatis</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Romantis'/><span>Romantis</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Misterius'/><span>Misterius</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Penuh Aksi'/><span>Penuh Aksi</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Komedi'/><span>Komedi</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Menegangkan (Suspense)'/><span>Menegangkan</span></label>
+                        <label><input name='generate-detail' type='checkbox' value='Inspiratif'/><span>Inspiratif</span></label>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label>Gaya Dialog</label>
+                    <div class='options-container' id='generate-dialog-options'>
+                        <label><input checked='checked' name='dialog' type='radio' value='seimbang antara dialog dan narasi'/><span>Seimbang</span></label>
+                        <label><input name='dialog' type='radio' value='banyak dialog'/><span>Banyak Dialog</span></label>
+                        <label><input name='dialog' type='radio' value='sedikit dialog'/><span>Sedikit Dialog</span></label>
+                        <label><input name='dialog' type='radio' value='dialog yang natural dan modern'/><span>Dialog Natural</span></label>
+                    </div>
+                </div>
+
+                <div class='form-group'>
+                    <label>Panjang Cerita</label>
+                    <div class='options-container' id='generate-length-options'>
+                        <label><input checked='checked' name='length' type='radio' value='pendek'/><span>Pendek (~150 kata)</span></label>
+                        <label><input name='length' type='radio' value='sedang'/><span>Sedang (~500 kata)</span></label>
+                        <label><input name='length' type='radio' value='panjang'/><span>Panjang (~1000 kata)</span></label>
+                        <label><input name='length' type='radio' value='sangat-panjang'/><span>Sangat Panjang (~2000 kata)</span></label>
+                        <label><input name='length' type='radio' value='epik'/><span>Epik (~5000 kata)</span></label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='app-button primary' id='generate-story-btn'>Generate</button>
+        </div>
+    </div>
+</div>  
+    
+    <div class='modal' id='revisi-setting-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Pengaturan Revisi</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Konteks Genre</h4>
+                        <div class='options-container' id='revisi-genre-options'></div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Gaya Revisi</h4>
+                        <div class='options-container' id='revisi-style-options'>
+                            <label><input checked='checked' name='revisi-style' type='radio' value='standar'/><span>Standar</span></label>
+                            <label><input name='revisi-style' type='radio' value='ringkas'/><span>Ringkas &amp; Padat</span></label>
+                            <label><input name='revisi-style' type='radio' value='detail'/><span>Lebih Detail</span></label>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Fokus Perbaikan</h4>
+                        <div class='options-container' id='revisi-focus-options'>
+                            <label><input checked='checked' name='revisi-focus' type='checkbox' value='ejaan dan tata bahasa'/><span>Ejaan &amp; Tata Bahasa</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='struktur kalimat'/><span>Struktur Kalimat</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='pilihan kosakata'/><span>Pilihan Kosakata</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='show dont tell'/><span>Fokus 'Show, Don't Tell'</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='kecepatan alur (pacing)'/><span>Perbaiki Pacing</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='dialog yang lebih natural'/><span>Poles Dialog</span></label>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Sudut Pandang (POV)</h4>
+                        <div class='options-container' id='revisi-pov-options'>
+                            <label><input checked='checked' name='revisi-pov' type='radio' value='tidak mengubah'/><span>Tidak Mengubah</span></label>
+                            <label><input name='revisi-pov' type='radio' value='Orang Pertama'/><span>Orang Pertama</span></label>
+                            <label><input name='revisi-pov' type='radio' value='Orang Ketiga Terbatas'/><span>Orang Ketiga</span></label>
+                        </div>
+                    </div>
+                    <div class='setting-group'>
+                        <h4 class='setting-group-title'>Target Pembaca</h4>
+                        <div class='options-container' id='revisi-audience-options'>
+                            <label><input checked='checked' name='revisi-audience' type='radio' value='Umum'/><span>Umum</span></label>
+                            <label><input name='revisi-audience' type='radio' value='Anak-anak'/><span>Anak-anak</span></label>
+                            <label><input name='revisi-audience' type='radio' value='Remaja'/><span>Remaja</span></label>
+                            <label><input name='revisi-audience' type='radio' value='Dewasa'/><span>Dewasa</span></label>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <h4 class='setting-group-title'>Tone &amp; Gaya Bahasa</h4>
+                        <input class='text-input' id='revisi-tone-input' placeholder='Contoh: Profesional, santai, dramatis, dll.' type='text'/>
+                    </div>
+                    <div class='form-group'>
+                        <h4 class='setting-group-title'>Instruksi Khusus</h4>
+                        <textarea class='text-input' id='revisi-custom-instruction' placeholder='Contoh: Jangan ubah nama &apos;Zephyr&apos;. Fokus perbaiki dialog.' style='min-height: 80px;'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='revise-button'>Revisi Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='revisi-preview-modal'>
+        <div class='modal-panel fixed-size-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Tinjau Hasil Revisi</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='editor-panel' style='height: 100%; border: none; background: transparent;'>
+                    <textarea class='main-textarea' id='preview-revisi-text' readonly='readonly'></textarea>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='revisi-preview-apply'>Terapkan ke Naskah</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='generate-preview-modal'>
+        <div class='modal-panel fixed-size-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Tinjau Hasil Generate</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='editor-panel' style='height: 100%; border: none; background-color: transparent;'>
+                    <textarea class='main-textarea' id='generate-preview-text' readonly='readonly'></textarea>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='generate-preview-apply'>Tambahkan ke Naskah</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class='modal' id='profile-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title' id='profile-title-modal'>Profil Pengguna</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div style='display: flex; flex-direction: column; align-items: center; text-align: center;'>
+                    <img alt='User Profile Photo' id='profile-img-modal' src='https://ui-avatars.com/api/?name=U&amp;background=random' style='width: 100px; height: 100px; border-radius: 50%; object-fit: cover;'/>
+                    <h2 id='profile-name-modal' style='margin-top: 1rem; margin-bottom: 0.25rem;'>Nama Pengguna</h2>
+                    <p id='profile-email-modal' style='margin: 0; color: var(--text-secondary);'></p>
+                    <p id='profile-desc-modal' style='margin-top: 1rem;'></p>
+                    <div class='social-links' id='social-links-view-modal'></div>
+                </div>
+            </div>
+            <div class='modal-footer' id='profile-footer-actions'></div>
+        </div>
+    </div>
+    
+    <div class='modal' id='edit-profile-modal'>
+        <div class='modal-panel'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Edit Profil</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body'>
+                <div class='custom-settings'>
+                    <div class='form-group' style='align-items: center;'>
+                        <label for='profile-edit-photo'>Foto Profil</label>
+                        <label class='profile-photo-uploader' for='profile-edit-photo'>
+                            <img alt='Preview Profile Photo' id='profile-edit-img' src=''/>
+                            <div class='icon-overlay'><i class='fas fa-camera'></i></div>
+                        </label>
+                        <input accept='image/*' id='profile-edit-photo' type='file'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='profile-edit-name'>Nama Pengguna</label>
+                        <input class='text-input' id='profile-edit-name' type='text'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='profile-edit-desc'>Deskripsi Singkat</label>
+                        <textarea class='text-input' id='profile-edit-desc' style='min-height: 80px;'></textarea>
+                    </div>
+                    <div class='form-group'>
+                        <label for='profile-edit-dob'>Tanggal Lahir</label>
+                        <input class='text-input' id='profile-edit-dob' type='date'/>
+                    </div>
+                    <div class='form-group'>
+                        <label>Sosial Media</label>
+                        <div class='social-input-group'>
+                            <i class='fab fa-tiktok' style='color:#ee1d52;'></i>
+                            <input class='text-input' id='social-tiktok' placeholder='Username TikTok' type='text'/>
+                        </div>
+                        <div class='social-input-group'>
+                            <i class='fab fa-instagram' style='color:#e4405f;'></i>
+                            <input class='text-input' id='social-instagram' placeholder='Username Instagram' type='text'/>
+                        </div>
+                        <div class='social-input-group'>
+                            <i class='fab fa-youtube' style='color:#ff0000;'></i>
+                            <input class='text-input' id='social-youtube' placeholder='Username YouTube' type='text'/>
+                        </div>
+                        <div class='social-input-group'>
+                            <i class='fab fa-facebook' style='color:#1877f2;'></i>
+                            <input class='text-input' id='social-facebook' placeholder='Username Facebook' type='text'/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='app-button primary' id='save-profile-btn'>Simpan Profil</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='modal' id='community-members-modal'>
+        <div class='modal-panel' style='max-width: 450px;'>
+            <div class='modal-header'>
+                <h3 class='modal-title'>Anggota Komunitas</h3>
+                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+            </div>
+            <div class='modal-body' id='community-members-list-container'>
+            </div>
+        </div>
+    </div>
+    
+    <script src='https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js'></script>
+    <script src='https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js'></script>
+    <script src="https://unpkg.com/dropbox@10.34.0/dist/Dropbox-sdk.min.js"></script>
+    <script src='script.js'></script>
+
+</body>
+</html>
