@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authenticating...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function handleAuthRedirect() {
+            const hash = window.location.hash.substring(1);
+            const params = new URLSearchParams(hash);
+            const token = params.get('access_token');
+
+            if (token) {
+                const appRedirectUrl = "revisipro://auth?token=" + token;
+                window.location.replace(appRedirectUrl);
+                setTimeout(function() {
+                    window.close();
+                }, 500);
+            } else {
+                document.getElementById('message').innerText = "Autentikasi gagal atau dibatalkan. Anda bisa menutup tab ini.";
+            }
+        }
+        window.onload = handleAuthRedirect;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <p id="message">Mohon tunggu, mengalihkan kembali ke aplikasi...</p>
+    </div>
+</body>
+</html>
