@@ -9,19 +9,19 @@
     </style>
     <script>
         function processAuth() {
-            // Mengambil semua data dari URL setelah tanda '#'
             const fragment = window.location.hash.substring(1);
-
-            if (fragment) {
-                // Jika ada data, langsung redirect ke aplikasi Android
-                // dengan membawa semua data tersebut.
-                window.location.href = `revisipro://auth#${fragment}`;
-            } else {
-                // Jika tidak ada data, tampilkan pesan error
-                document.getElementById('message').textContent = "Error: Token tidak ditemukan di URL.";
+            if (!fragment) {
+                document.getElementById('message').textContent = "Error: Token tidak ditemukan.";
+                return;
             }
+
+            // Arahkan ke aplikasi dengan membawa seluruh data
+            // Aplikasi Android akan mem-parsing token yang sesuai
+            window.location.href = `revisipro://auth#${fragment}`;
+            
+            // Coba tutup tab setelah redirect
+            setTimeout(() => { window.close(); }, 500);
         }
-        // Jalankan fungsi ini segera setelah halaman dimuat
         window.onload = processAuth;
     </script>
 </head>
