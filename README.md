@@ -9,11 +9,11 @@ https://mawwsenpai.github.io/RevisiPro/index.html
 
 script.js
 
-~Locked ~Script
+~Locked
 
-~Locked ~Css
+~Locked
 
-~Locked ~Autentiksi
+~Locked
 
 
 style.css
