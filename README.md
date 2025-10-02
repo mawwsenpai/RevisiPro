@@ -2,6 +2,13 @@
 
 Costom Template By MawwSenpai_
 
+
+Demo:
+https://mawwsenpai.github.io/RevisiPro/index.html
+
+
+script.js
+
 ~Locked ~Script
 
 ~Locked ~Css
