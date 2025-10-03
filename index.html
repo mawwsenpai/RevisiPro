@@ -36,7 +36,7 @@
                 <div class='sidebar-header-top'>
                     <div>
                         <h2 class='sidebar-title'>Novel Revisi Pro</h2>
-                        <p class='sidebar-version'>v50.3.4.1 By-MawwSenpai_</p>
+                        <p class='sidebar-version'>v50.5.0.7 By-MawwSenpai_</p>
                     </div>
                 </div>
                 <button class='modal-close-btn' onclick='document.getElementById(&apos;app-sidebar&apos;).classList.remove(&apos;is-open&apos;)' style='display: none;'>&amp;times;</button>
@@ -57,14 +57,21 @@
                             </li>
                         </ul>
                     </div>
-                    <div class='control-group'>
-                        <h3 class='control-group-title'>Navigasi</h3>
-                        <ul class='nav-list'>
-                            <li><a class='nav-link active' data-view='app-dashboard' href='#'><i class='fas fa-home'></i><span>Dashboard</span></a></li>
-                            <li><a class='nav-link' data-modal-target='backupRestore' href='#' id='backup-restore-link'><i class='fas fa-cloud-download-alt'></i><span>Cloud</span></a></li>
-                            <li><a class='nav-link' data-modal-target='displaySettings' href='#'><i class='fas fa-cog'></i><span>Pengaturan Tampilan</span></a></li>
-                        </ul>
-                    </div>
+<div class='control-group'>
+    <h3 class='control-group-title'>Navigasi</h3>
+    <ul class='nav-list'>
+        <li><a class='nav-link active' data-view='app-dashboard' href='#'><i class='fas fa-home'></i><span>Dashboard</span></a></li>
+        <li><a class='nav-link' data-modal-target='backupRestore' href='#' id='backup-restore-link'><i class='fas fa-cloud-download-alt'></i><span>Cloud</span></a></li>
+        <li><a class='nav-link' data-modal-target='displaySettings' href='#'><i class='fas fa-cog'></i><span>Pengaturan Tampilan</span></a></li>
+        
+        <li id="download-app-link-container" style="display: none;">
+            <a class="nav-link" href="#" id="show-download-modal-btn">
+                <i class="fab fa-android"></i>
+                <span>Unduh Aplikasi</span>
+            </a>
+        </li>
+    </ul>
+</div>
                 </nav>
             </div>
         </aside>
@@ -97,14 +104,14 @@
 
             <div class='main-view' id='novel-detail-view'>
                 <header class='main-header'>
-                    <div class='main-header-left'>
-                        <button aria-label='Kembali ke Beranda' class='mobile-menu-toggle' id='back-to-dashboard-btn' title='Kembali ke Beranda'><i class='fas fa-arrow-left'></i></button>
-                        <h1 class='main-title'>Detail Novel</h1>
-                    </div>
-                    <div class='main-header-right'>
-                        <button aria-label='Edit Info Novel' class='app-button outline' data-modal-target='editNovel' id='edit-novel-info-btn' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;' title='Edit Info Novel'><i class='fas fa-edit'></i></button>
-                    </div>
-                </header>
+    <div class='main-header-left'>
+        <button aria-label='Kembali ke Beranda' class='mobile-menu-toggle' id='back-to-dashboard-btn' title='Kembali ke Beranda'><i class='fas fa-arrow-left'></i></button>
+        <h1 class='main-title'>Detail Novel</h1>
+    </div>
+    <div class='main-header-right'>
+        <button aria-label='Edit Info Novel' class='app-button outline' data-modal-target='editNovel' id='edit-novel-info-btn' style='border-radius: 50%; width: 44px; height: 44px; padding: 0;' title='Edit Info Novel'><i class='fas fa-edit'></i></button>
+    </div>
+        </header>
                 <div class='novel-detail-container'>
                     <div class='novel-header-info'>
                         <div class='novel-cover-wrapper'>
@@ -240,33 +247,25 @@
         <b:section class='main' id='main' showaddelement='no'/>
     </div>
     
-    <div class='modal' id='require-app-modal'>
-        <div class='modal-panel' style='max-width: 420px;'>
-            <div class='modal-header'>
-                <h3 class='modal-title' style='display: flex; align-items: center; gap: 10px;'>
-                    <i class='fab fa-android' style='color: var(--accent-color);'></i>
-                    <span>Fitur Lengkap di Aplikasi</span>
-                </h3>
-                <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
-            </div>
-            <div class='modal-body' style='padding-bottom: var(--padding-lg);'>
-                <p style='text-align: center; margin-top:0; margin-bottom: 1.5rem; color: var(--text-secondary);'>
-                    Untuk mengakses <b>Komunitas, Profil, Tema &amp; Animasi Eksklusif</b>, silakan gunakan aplikasi Android kami.
-                </p>
-                <div style='text-align: center; display: flex; flex-direction: column; gap: 1rem;'>
-                    <a href="https://drive.usercontent.google.com/download?id=1xFuzDv8dgbjKGUkaOPBNkb62YF2CQTsZ&amp;export=download" 
-                        download="Novel-Revisi-Pro.apk" 
-                        class="app-button outline" 
-                        style="text-decoration: none; padding: 10px 24px; font-size: 1em;">
-                       <i class='fas fa-download'></i> Unduh Aplikasi
-                    </a>
-                    <button class="app-button primary" id="web-login-btn">
-                       <i class="fas fa-sign-in-alt"></i> Login Sekarang
-                    </button>
-                </div>
-            </div>
+<div class='modal' id='download-app-modal'>
+    <div class='modal-panel' style='max-width: 420px;'>
+        <div class='modal-header'>
+            <h3 class='modal-title'>Unduh Aplikasi RevisiPro</h3>
+            <button aria-label='Tutup' class='modal-close-btn'>&amp;times;</button>
+        </div>
+        <div class='modal-body' style='text-align: center; padding-bottom: var(--padding-lg);'>
+            <p style='color: var(--text-secondary); margin-top:0; margin-bottom: 1.5rem;'>
+                Dapatkan pengalaman terbaik dan akses semua fitur eksklusif dengan mengunduh aplikasi Android kami.
+            </p>
+            <a href="https://www.dropbox.com/scl/fi/4bii06uu08mezfudglh0s/RevisiPro-V50.5.0.7.apk?rlkey=x2y9k7psmjoerat1uhbamtiod&amp;st=l6yi8q3j&amp;dl=0" 
+               download="RevisiPro-V50.5.0.7.apk" 
+               class="app-button primary" 
+               style="text-decoration: none; padding: 10px 24px; font-size: 1em;">
+               <i class='fas fa-download'></i> Unduh RevisiPro v50.5.0.7
+            </a>
         </div>
     </div>
+</div>
     
     <div class='modal' id='quick-revisi-modal'>
         <div class='modal-panel' style='max-width: 450px;'>
@@ -483,7 +482,7 @@
         </div>
     </div>
     
-    <div class='modal' id='generate-modal'>
+   <div class='modal' id='generate-modal'>
     <div class='modal-panel fixed-size-panel'>
         <div class='modal-header'>
             <h3 class='modal-title'>Generate Cerita</h3>
@@ -571,7 +570,7 @@
             <button class='app-button primary' id='generate-story-btn'>Generate</button>
         </div>
     </div>
-</div>  
+</div> 
     
     <div class='modal' id='revisi-setting-modal'>
         <div class='modal-panel'>
@@ -599,7 +598,7 @@
                             <label><input checked='checked' name='revisi-focus' type='checkbox' value='ejaan dan tata bahasa'/><span>Ejaan &amp; Tata Bahasa</span></label>
                             <label><input name='revisi-focus' type='checkbox' value='struktur kalimat'/><span>Struktur Kalimat</span></label>
                             <label><input name='revisi-focus' type='checkbox' value='pilihan kosakata'/><span>Pilihan Kosakata</span></label>
-                            <label><input name='revisi-focus' type='checkbox' value='show dont tell'/><span>Fokus 'Show, Don't Tell'</span></label>
+                            <label><input name='revisi-focus' type='checkbox' value='show dont tell'/><span>Fokus &apos;Show, Don&apos;t Tell&apos;</span></label>
                             <label><input name='revisi-focus' type='checkbox' value='kecepatan alur (pacing)'/><span>Perbaiki Pacing</span></label>
                             <label><input name='revisi-focus' type='checkbox' value='dialog yang lebih natural'/><span>Poles Dialog</span></label>
                         </div>
