@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
       
       (data.items || []).forEach(post => {
         const imageUrl = (post.images && post.images.length > 0) ? post.images[0].url : config.placeholderImage;
-        l
         const card = document.createElement('a');
         card.href = `post.html?id=${post.id}`; 
         card.className = 'novel-card';
