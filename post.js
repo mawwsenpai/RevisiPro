@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const BLOG_ID = '6254769183374606696';
+    const BLOG_ID = '6254769183374606696'; 
     const API_KEY = 'AIzaSyBvWOW46b0zJ3zmUp4fSUyaw1VnNvxCF60'; 
     const judulContainer = document.getElementById('judul-postingan');
     const isiContainer = document.getElementById('isi-postingan');
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`Error dari Blogger: ${data.error.message}`);
             }
 
-            document.title = data.title; // Ganti judul tab browser
+            document.title = data.title;
             judulContainer.textContent = data.title;
             isiContainer.innerHTML = data.content; 
 
