@@ -495,7 +495,8 @@ input,
 .novel-cover,
 #profile-img,
 #profile-edit-img,
-.profile-nav-link-img {
+.profile-nav-link-img 
+.post-body img {
   pointer-events: none;
 }
 

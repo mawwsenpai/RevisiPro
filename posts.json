@@ -1,0 +1,17 @@
+[
+  {
+    "judul": "Judul Postingan Pertamaku",
+    "link": "link-ke-halaman-post-1.html",
+    "ringkasan": "Ini adalah ringkasan singkat dari postingan pertamaku. Membahas tentang A, B, dan C..."
+  },
+  {
+    "judul": "Petualangan Kedua Dimulai",
+    "link": "link-ke-halaman-post-2.html",
+    "ringkasan": "Di postingan kedua ini, ceritanya makin seru dan menegangkan. Lanjutan dari cerita sebelumnya."
+  },
+  {
+    "judul": "Tutorial Membuat Sesuatu yang Keren",
+    "link": "link-ke-halaman-post-3.html",
+    "ringkasan": "Ikuti langkah-langkah mudah ini untuk membuat sesuatu yang keren dari barang bekas."
+  }
+]

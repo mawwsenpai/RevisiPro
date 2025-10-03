@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda Blog - Revisi Pro</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel='stylesheet'/>
+    <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap' rel='stylesheet'/>
+</head>
+<body class="no-copy" oncontextmenu="return false;">
+    
+ <script src="theme.js"></script>
+
+    <main class="app-main-content" style="padding: 0;">
+        <header class='main-header'>
+            <div class='main-header-left'>
+                <a href="index.html" class='mobile-menu-toggle' title='Kembali ke Aplikasi Utama'><i class='fas fa-arrow-left'></i></a>
+                <h1 class='main-title'>Beranda</h1>
+            </div>
+        </header>
+
+        <div class='dashboard-content'>
+            <div class='novel-list-container' style="padding: 0;">
+                <div class='novel-list-scroller' id='blog-list-container' style="flex-wrap: wrap; justify-content: center; padding: 0 var(--padding-md);">
+                    <p id="blog-list-loading">Memuat postingan...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="blog.js" defer></script>
+
+</body>
+</html>

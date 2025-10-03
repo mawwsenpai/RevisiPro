@@ -1,0 +1,26 @@
+name: Fetch Blogger Posts
+
+on:
+  workflow_dispatch: # Tombol manual untuk menjalankan
+  schedule:
+    - cron: '0 */6 * * *' # Otomatis jalan setiap 6 jam
+
+jobs:
+  fetch-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Fetch Blogger Data
+        run: |
+          curl "https://www.blogger.com/feeds/6254769183374606696/posts/default?alt=json" > posts.json
+
+      - name: Commit and Push if content changed
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "BOT: Update Blogger posts"
+          file_pattern: posts.json
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
+          commit_author: "GitHub Actions Bot <actions@github.com>"
