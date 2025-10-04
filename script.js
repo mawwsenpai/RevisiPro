@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const DROPBOX_CONFIG = {
         appKey: "ilqrg4p3g077kh8",
         appSecret: "sh8yz7g6fmafkr1",
-        redirectUri: "https://mawwsenpai.github.io",
+        redirectUri: "https://mawwsenpai.github.io/RevisiPro",
         accessToken: null,
         dropboxClient: null,
     };
