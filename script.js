@@ -1021,7 +1021,7 @@ syncAndCleanNovelInCloud: async (novelId) => {
     try {
         cloudChapterFiles = await methods.listFilesInDropboxFolder(chapterFolderPath);
     } catch (e) {
-        // Folder not found is okay
+    
     }
 
     const deletionPromises = [];
