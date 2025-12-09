@@ -1059,7 +1059,7 @@ syncAndCleanNovelInCloud: async (novelId) => {
         prompt += `\n\nNaskah Asli:\n"${textToRevise}"`;
         prompt += `\n\nOutput hanya revisi teks, tanpa catatan:`;
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
@@ -1113,7 +1113,7 @@ syncAndCleanNovelInCloud: async (novelId) => {
     
     methods.showLoading("Menyiapkan cerita...");
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
@@ -2139,7 +2139,7 @@ updateNativeTheme: () => {
             prompt = `Buat teks berikut menjadi lebih ringkas dan tidak bertele-tele, tanpa mengubah makna utama. Kembalikan HANYA teks yang sudah diringkas.\:n\nNaskah:\n"${textToRevise}"`;
         }
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
