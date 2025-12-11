@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         accessToken: null,
         dropboxClient: null,
     };
-    const GEMINI_API_KEY = "AIzaSyA7ClfQHZBGB7Qu-vJeiheRBe1diostcB8";
+    const GEMINI_API_KEY = "AIzaSyD_GNGwTUxYf7M-OdmUO6MRboKuIrCrdTI";
 
     const el = {
         root: doc.documentElement, body: doc.body,
